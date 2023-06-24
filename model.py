@@ -9,6 +9,19 @@ def open_file():
         user_id, name, phone, comment, *_ = contact.strip().split(':')
         phone_book.append({'id': user_id, 'name': name, 'phone': phone, 'comment': comment})
 
+def save_file():
+    contact = []
+    new_phone_book = []
+    for dictionary in phone_book:
+        for value in dictionary:
+            contact.append(str(dictionary[value]))
+        new_phone_book.append(':'.join(contact)+'\n')
+        contact.clear()
+    with open(path, 'w', encoding='UTF-8') as file:
+        file.writelines(new_phone_book)
+    file.close()
+    
+
 def check_id():
     uid_list = []
     for contact in phone_book:
@@ -38,9 +51,5 @@ def change(index: int, new: dict[str, str]):
     for key, field in new.items():
         if field != '':
             phone_book[index - 1][key] = field
-
-
-
-    
 
 
