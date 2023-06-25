@@ -30,13 +30,15 @@ def check_id():
 
 
 def add_contact(new: dict):
-    new.update(check_id())
-    phone_book.append(new)
+    new_contact = check_id()
+    new_contact.update(new)
+    phone_book.append(new_contact)
 
 def delete_contact(index: int):
     phone_book.pop(index-1)
-    
-          
+    for i in range (index-1, len(phone_book)):
+        phone_book[i]['id']=str(i+1)
+        
 def search(word: str) -> list[dict]:
     result = []
     for contact in phone_book:
